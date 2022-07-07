@@ -50,7 +50,8 @@ class ChipsInput<T> extends StatefulWidget {
     this.autofocus = false,
     this.allowChipEditing = false,
     this.focusNode,
-    this.initialSuggestions, 
+    this.initialSuggestions,
+    this.suggestionsBoxElevation = 0,
     this.suggestionsBoxDecoration = const BoxDecoration(),
   })  : assert(maxChips == null || initialValue.length <= maxChips),
         super(key: key);
@@ -76,6 +77,7 @@ class ChipsInput<T> extends StatefulWidget {
   final bool allowChipEditing;
   final FocusNode? focusNode;
   final List<T>? initialSuggestions;
+  final double suggestionsBoxElevation;
   final BoxDecoration suggestionsBoxDecoration;
 
   // final Color cursorColor;
@@ -205,7 +207,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>>
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data!.isNotEmpty) {
               final suggestionsListView = Material(
-                elevation: 0,
+                elevation: widget.suggestionsBoxElevation,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     maxHeight: suggestionBoxHeight,
